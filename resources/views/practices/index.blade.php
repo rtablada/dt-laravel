@@ -9,6 +9,7 @@
   </div>
 </div>
 
+@if($practices->count())
 <div class="list-block">
   <ul>
     @foreach($practices as $practice)
@@ -18,7 +19,7 @@
           <div class="item-inner">
             {{ $practice->started_at->toFormattedDateString() }} -
             {{ $practice->completionTime }} -
-            {{ $practice->successRate }}%
+            {{ round($practice->successRate, 2) }}%
           </div>
         </div>
       </a>
@@ -26,6 +27,7 @@
     @endforeach
   </ul>
 </div>
+@endif
 
 <div class="toolbar">
   <div class="toolbar-inner">

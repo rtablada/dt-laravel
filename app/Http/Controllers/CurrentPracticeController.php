@@ -17,6 +17,7 @@ class CurrentPracticeController extends Controller
         $this->currentPractice = $practice->with('exercisePerformances')
         ->where([
             'user_id' => $this->user->id,
+            'ended_at' => null,
         ])
         ->orderBy('created_at')
         ->first();
@@ -24,17 +25,20 @@ class CurrentPracticeController extends Controller
 
     public function go(Request $req)
     {
+        if (!$this->currentPractice) {
+            $req->session()->flash('warning', 'You must start a new practice.');
+
+            return redirect()->route('practices.create');
+        }
+
         $totalCount = $this->currentPractice->exerciseCount;
         $exerciseNumber = $totalCount - $this->currentPractice->remainingExerciseCount + 1;
-
 
         if ($totalCount < $exerciseNumber) {
             $this->currentPractice->ended_at = Carbon::now();
             $this->currentPractice->save();
 
-            $req->session()->put('finishedPractice', $this->currentPractice);
-
-            return redirect()->route('current-practice.result');
+            return redirect()->route('practices.details');
         }
 
         $exercise = $this->currentPractice->randomExercise();
@@ -54,16 +58,5 @@ class CurrentPracticeController extends Controller
         $exercise->pivot->save();
 
         return redirect()->route('current-practice.go');
-    }
-
-    public function result(Request $req)
-    {
-        $practice = $req->session()->pull('finishedPractice');
-
-        if (!$practice) {
-            return redirect()->route('practices.index');
-        }
-
-        return view('current-practice.result', compact('practice'));
     }
 }

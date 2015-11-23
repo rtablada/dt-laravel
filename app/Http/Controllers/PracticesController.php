@@ -53,4 +53,17 @@ class PracticesController extends Controller
 
         return redirect()->route('current-practice.go');
     }
+
+
+
+    public function details(Request $req, $id)
+    {
+        $practice = $this->practice->find($id);
+
+        if (!$practice) {
+            return redirect()->route('practices.index');
+        }
+
+        return view('current-practice.result', compact('practice'));
+    }
 }

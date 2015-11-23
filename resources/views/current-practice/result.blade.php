@@ -15,6 +15,13 @@
 
 <div class="list-block">
   <ul>
+    <li>
+      <div class="item-content">
+        <div class="item-inner">
+          {{ $practice->started_at->toFormattedDateString() }}
+        </div>
+      </div>
+    </li>
     @foreach($practice->exercisePerformances as $performance)
     <li>
       <div class="item-content">
