@@ -10,3 +10,12 @@ $fa-font-path:        "//netdna.bootstrapcdn.com/font-awesome/4.4.0/fonts" !defa
 .toolbar {
   position: fixed;
 }
+
+button.no-style {
+  border: none;
+  outline: none;
+  background: none;
+  color: #007aff;
+  font-size: inherit;
+  cursor: pointer;
+}

@@ -11741,3 +11741,12 @@ html:not(.watch-active-state) .layout-white label.label-radio:active,
 .toolbar {
   position: fixed;
 }
+
+button.no-style {
+  border: none;
+  outline: none;
+  background: none;
+  color: #007aff;
+  font-size: inherit;
+  cursor: pointer;
+}
