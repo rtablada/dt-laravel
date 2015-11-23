@@ -9,6 +9,24 @@
   </div>
 </div>
 
+<div class="list-block">
+  <ul>
+    @foreach($practices as $practice)
+    <li>
+      <a href="{{ route('practices.details', $practice) }}" class="item-link">
+        <div class="item-content  training-item {{ $practice->successRate < 70 ? 'training-item--warning' : null}}">
+          <div class="item-inner">
+            {{ $practice->started_at->toFormattedDateString() }} -
+            {{ $practice->completionTime }} -
+            {{ $practice->successRate }}%
+          </div>
+        </div>
+      </a>
+    </li>
+    @endforeach
+  </ul>
+</div>
+
 <div class="toolbar">
   <div class="toolbar-inner">
     <span></span>

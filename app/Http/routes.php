@@ -10,6 +10,7 @@ $router->get('/signup', ['as' => 'signup.create', 'uses' => 'Auth\\AuthControlle
 $router->post('/signup', ['as' => 'signup.store', 'uses' => 'Auth\\AuthController@postRegister']);
 
 $router->get('/', ['as' => 'practices.index', 'uses' => 'PracticesController@index']);
+$router->get('/practices/{id}', ['as' => 'practices.details', 'uses' => 'PracticesController@details']);
 
 $router->get('/new', ['as' => 'practices.create', 'uses' => 'PracticesController@create']);
 $router->post('/new', ['as' => 'practices.start', 'uses' => 'PracticesController@start']);
