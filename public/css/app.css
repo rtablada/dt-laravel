@@ -11811,3 +11811,24 @@ button.no-style {
 .exercise__response--pass {
   background: #44db5e;
 }
+
+.result__icon {
+  width: 29px;
+  height: 29px;
+  display: inline-block;
+  vertical-align: middle;
+  background-size: 100% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-style: normal;
+  position: relative;
+  border-radius: 4px;
+}
+
+.result__icon--pass {
+  background: #44db5e;
+}
+
+.result__icon--fail {
+  background: #ff9600;
+}

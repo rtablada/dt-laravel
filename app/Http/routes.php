@@ -16,3 +16,4 @@ $router->post('/new', ['as' => 'practices.start', 'uses' => 'PracticesController
 
 $router->get('/practice', ['as' => 'current-practice.go', 'uses' => 'CurrentPracticeController@go']);
 $router->post('/practice', ['as' => 'current-practice.store', 'uses' => 'CurrentPracticeController@store']);
+$router->get('/results', ['as' => 'current-practice.result', 'uses' => 'CurrentPracticeController@result']);

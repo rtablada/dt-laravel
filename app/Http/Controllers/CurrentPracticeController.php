@@ -27,7 +27,13 @@ class CurrentPracticeController extends Controller
         $totalCount = $this->currentPractice->exerciseCount;
         $exerciseNumber = $totalCount - $this->currentPractice->remainingExerciseCount + 1;
 
-        if ($totalCount === $exerciseNumber) {
+
+        if ($totalCount < $exerciseNumber) {
+            $this->currentPractice->ended_at = Carbon::now();
+            $this->currentPractice->save();
+
+            $req->session()->put('finishedPractice', $this->currentPractice);
+
             return redirect()->route('current-practice.result');
         }
 
@@ -41,12 +47,23 @@ class CurrentPracticeController extends Controller
 
     public function store(Request $req)
     {
-        $exercise = $req->session()->get('currentExercise');
+        $exercise = $req->session()->pull('currentExercise');
 
         $exercise->pivot->ended_at = Carbon::now();
         $exercise->pivot->success = $req->get('success');
         $exercise->pivot->save();
 
         return redirect()->route('current-practice.go');
+    }
+
+    public function result(Request $req)
+    {
+        $practice = $req->session()->pull('finishedPractice');
+
+        if (!$practice) {
+            return redirect()->route('practices.index');
+        }
+
+        return view('current-practice.result', compact('practice'));
     }
 }

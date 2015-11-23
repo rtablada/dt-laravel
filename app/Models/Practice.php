@@ -24,7 +24,7 @@ class Practice extends Model
     public function exercisePerformances()
     {
         return $this->belongsToMany(Exercise::class, 'exercise_performances')
-            ->withPivot('ended_at', 'started_at');
+            ->withPivot('ended_at', 'started_at', 'success');
     }
 
     public function getIncompleteExercisesAttribute()
