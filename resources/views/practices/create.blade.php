@@ -5,8 +5,8 @@
 <div class="navbar">
   <div class="navbar-inner navbar-on-center">
     <div class="left">
-      <a href="{{ route('practices.create') }}" class="open-popover link">
-        <i class="fa fa-edit"></i>
+      <a href="{{ route('practices.index') }}" class="open-popover link">
+        Back
       </a>
     </div>
     <div class="center sliding">New Training Session</div>
