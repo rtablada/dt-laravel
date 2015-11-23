@@ -9,12 +9,16 @@ $router->any('/logout', ['as' => 'logout', 'uses' => 'Auth\\AuthController@getLo
 $router->get('/signup', ['as' => 'signup.create', 'uses' => 'Auth\\AuthController@getRegister']);
 $router->post('/signup', ['as' => 'signup.store', 'uses' => 'Auth\\AuthController@postRegister']);
 
-$router->get('/', ['as' => 'practices.index', 'uses' => 'PracticesController@index']);
-$router->get('/practices/{id}', ['as' => 'practices.details', 'uses' => 'PracticesController@details']);
+$router->group(['middleware' => 'auth'], function($router) {
 
-$router->get('/new', ['as' => 'practices.create', 'uses' => 'PracticesController@create']);
-$router->post('/new', ['as' => 'practices.start', 'uses' => 'PracticesController@start']);
+    $router->get('/', ['as' => 'practices.index', 'uses' => 'PracticesController@index']);
+    $router->get('/practices/{id}', ['as' => 'practices.details', 'uses' => 'PracticesController@details']);
 
-$router->get('/practice', ['as' => 'current-practice.go', 'uses' => 'CurrentPracticeController@go']);
-$router->post('/practice', ['as' => 'current-practice.store', 'uses' => 'CurrentPracticeController@store']);
-$router->get('/results', ['as' => 'current-practice.result', 'uses' => 'CurrentPracticeController@result']);
+    $router->get('/new', ['as' => 'practices.create', 'uses' => 'PracticesController@create']);
+    $router->post('/new', ['as' => 'practices.start', 'uses' => 'PracticesController@start']);
+
+    $router->get('/practice', ['as' => 'current-practice.go', 'uses' => 'CurrentPracticeController@go']);
+    $router->post('/practice', ['as' => 'current-practice.store', 'uses' => 'CurrentPracticeController@store']);
+    $router->get('/results', ['as' => 'current-practice.result', 'uses' => 'CurrentPracticeController@result']);
+
+});
