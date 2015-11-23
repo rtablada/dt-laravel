@@ -23,6 +23,31 @@ class Practice extends Model
 
     public function exercisePerformances()
     {
-        return $this->belongsToMany(Exercise::class, 'exercise_performances');
+        return $this->belongsToMany(Exercise::class, 'exercise_performances')
+            ->withPivot('ended_at', 'started_at');
+    }
+
+    public function getIncompleteExercisesAttribute()
+    {
+        return $this->exercisePerformances->filter(function($exercisePerformance) {
+            return $exercisePerformance->pivot->ended_at === null;
+        });
+    }
+
+    public function getExerciseCountAttribute()
+    {
+        return $this->exercisePerformances->count();
+    }
+
+    public function getRemainingExerciseCountAttribute()
+    {
+        return $this->getIncompleteExercisesAttribute()->count();
+    }
+
+    public function randomExercise()
+    {
+        $incompleteExercises = $this->getIncompleteExercisesAttribute();
+
+        return $incompleteExercises->random();
     }
 }

@@ -13,3 +13,6 @@ $router->get('/', ['as' => 'practices.index', 'uses' => 'PracticesController@ind
 
 $router->get('/new', ['as' => 'practices.create', 'uses' => 'PracticesController@create']);
 $router->post('/new', ['as' => 'practices.start', 'uses' => 'PracticesController@start']);
+
+$router->get('/practice', ['as' => 'current-practice.go', 'uses' => 'CurrentPracticeController@go']);
+$router->post('/practice', ['as' => 'current-practice.store', 'uses' => 'CurrentPracticeController@store']);

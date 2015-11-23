@@ -17,7 +17,7 @@ class CreateExercisePerformancesTable extends Migration
 
             $table->integer('exercise_id');
             $table->integer('practice_id');
-            $table->boolean('success')->nullable();
+            $table->boolean('success')->default(0);
             $table->timestamp('started_at')->nullable();
             $table->timestamp('ended_at')->nullable();
         });
